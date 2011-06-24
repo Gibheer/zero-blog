@@ -1,5 +1,6 @@
 class Blog < Sinatra::Base
-  set :logging, true
+  set $settings
+
   get '/' do
     s = '<p><a href="/admin">Adminpanel</a></p>'
     Post.all(:released => true, :order => [:written.desc]).each do |post|
