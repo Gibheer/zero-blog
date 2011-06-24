@@ -6,9 +6,6 @@ require 'data_mapper'
 require 'sinatra'
 require 'settings'
 
-DataMapper::Logger.new($stdout, :debug) if Configuration.environment == :development
-DataMapper.setup(:default, Configuration.dbconn)
-
 # load the models
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__)) + '/models'
 require 'account'
