@@ -1,0 +1,12 @@
+!!! 5
+%html
+  %head
+    %title="zero-knowledge"
+    %link{:rel => 'stylesheet', :href => '/stylesheet.css', :type => 'text/css'}
+  %body
+    %header#header
+      %h1="zero-knowledge.org"
+    #content
+      %p.hint= link_to('Adminpanel', '/admin')
+      =yield
+    %footer#footer="ein footer"

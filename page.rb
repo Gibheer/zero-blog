@@ -2,11 +2,12 @@ class Blog < Sinatra::Base
   set $settings
 
   get '/' do
-    s = '<p><a href="/admin">Adminpanel</a></p>'
-    Post.all(:released => true, :order => [:written.desc]).each do |post|
-      s += "Post: #{post.title} von #{post.account.username}<br />"
-    end
-    s
+    @posts = Post.all(:released => true, :order => [:written.desc])
+    haml :index
+  end
+
+  get '/stylesheet.css' do
+    scss :stylesheet
   end
 
   get '/404' do
@@ -23,5 +24,9 @@ class Blog < Sinatra::Base
 
   error 502 do
     'oh no, i think i wet myself'
+  end
+
+  def link_to display, link
+    "<a href=\"${link}\">#{display}</a>"
   end
 end
