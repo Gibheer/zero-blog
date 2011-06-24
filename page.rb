@@ -7,4 +7,20 @@ class Blog < Sinatra::Base
     end
     s
   end
+
+  get '/404' do
+    404
+  end
+
+  error 404 do
+    'where am i? is somebody here? hello?'
+  end
+
+  get '/502' do
+    502
+  end
+
+  error 502 do
+    'oh no, i think i wet myself'
+  end
 end
