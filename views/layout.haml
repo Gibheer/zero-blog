@@ -3,6 +3,7 @@
   %head
     %title="zero-knowledge"
     %link{:rel => 'stylesheet', :href => '/stylesheet.css', :type => 'text/css'}
+    %script{:src => 'public/head.min.js'}
   %body
     %header#header
       %h1="zero-knowledge.org"
@@ -10,3 +11,5 @@
       %p.hint= link_to('Adminpanel', '/admin')
       =yield
     %footer#footer="ein footer"
+    %script
+      ="head.js('http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', '/public/app.js')"
