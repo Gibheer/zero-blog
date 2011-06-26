@@ -1,0 +1,64 @@
+.CodeRay {
+  font-family: $font-family-code;
+  //line-height: $font-size * 1.2;
+  background-color: #232323;
+  border: 1px solid black;
+  color: #E6E0DB;
+  padding: 3px 5px;
+  overflow: auto;
+  margin: 12px 0;
+  pre {
+    margin: 0px;
+    padding: 0px; }
+  .an {
+    color: #E7BE69; }
+  .c {
+    color: #BC9358;
+    font-style: italic; }
+  .ch {
+    color: #509E4F; }
+  .cl, .co {
+    color: #FFF; }
+  .fl {
+    color: #A4C260; }
+  .fu {
+    color: #FFC56D; }
+  .gv {
+    color: #D0CFFE; }
+  .i {
+    color: #A4C260; }
+  .il {
+    background: #151515; }
+  .iv {
+    color: #D0CFFE; }
+  .pp {
+    color: #E7BE69; }
+  .r {
+    color: #CB7832; }
+  .rx, .s {
+    color: #A4C260; }
+  .sy {
+    color: #6C9CBD; }
+  .ta {
+    color: #E7BE69; }
+  .pc {
+    color: #6C9CBD; } }
+
+/* html attribute */
+/* comment */
+/* escaped character */
+/* class */
+/* constant */
+/* float */
+/* function */
+/* global variable */
+/* integer */
+/* inline code */
+/* instance variable */
+/* doctype */
+/* keyword */
+/* regex */
+/* string */
+/* symbol */
+/* html tag */
+/* boolean */

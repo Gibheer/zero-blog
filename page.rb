@@ -1,5 +1,6 @@
 class Blog < Sinatra::Base
   set $settings
+  register Sinatra::CompassSupport
 
   get '/' do
     @posts = Post.all(:released => true, :order => [:written.desc])

@@ -1,6 +1,7 @@
 source :rubygems
 
 gem 'sinatra'
+gem 'sinatra-support'
 gem 'haml'
 gem 'sass'
 gem 'compass'

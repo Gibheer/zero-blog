@@ -1,0 +1,117 @@
+header, article, section, aside, footer {
+  display: block;
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-size: $font-size-base;
+  background: $background2; }
+
+body {
+  font-size: $font-size;
+  font-family: $font-family;
+  color: $font-color1;
+  line-height: $font-size * 1.3;
+  min-width: $body-min-width;
+  max-width: $body-max-width;
+  margin: auto;
+  margin-top: $top-gap;
+  margin-bottom: $top-gap;
+  padding: 2em;
+  padding-top: 0;
+  background-color: $background1;
+  @include set-border-radius;
+  a {
+    color: $link-color1;
+    padding: 0.25em;
+    &:visited {
+      color: $link-color1; }
+    &:hover, &:active {
+      background-color: $highlight-color1;
+      @include set-border-radius;
+      @include background-image(linear-gradient($highlight-gradient)); } }
+  code {
+    font-family: $font-family-code; }
+  #wrapper {
+    margin-top: 5em; }
+  #header {
+    position: absolute;
+    width: 800px;
+    top: 0;
+    h1 {
+      > img {
+        margin-top: 2em; }
+      a {
+        font: {
+          size: $font-size * 4;
+          weight: bold; };
+        text-decoration: none;
+        padding: 0;
+        float: left;
+        text-shadow: 2px 5px 8px darken($background1, 10);
+        color: $link-color1;
+        &:hover, &:active {
+          background: none;
+          text-shadow: 3px 5px 8px darken($link-color1, 20); } } } }
+  #linklist {
+    border: 1px solid black;
+    float: right;
+    width: 250px; }
+  #content {
+    padding-top: $top-gap;
+    article {
+      clear: both;
+      margin-bottom: 1em;
+      padding-bottom: 0.5em;
+      @include set-border-with-radius;
+      @include clearfix;
+      section {
+        padding: 1em;
+        clear: left;
+        p {
+          margin-bottom: 1em; } }
+      header {
+        float: left;
+        margin: 1em;
+        margin-bottom: 0;
+        h1 {
+          font-size: $font-size * 1.5;
+          font-weight: bold; } }
+      footer {
+        float: right;
+        width: 6.85em;
+        padding: 0.75em;
+        margin-left: 0.5em;
+        margin-bottom: 0.5em;
+        text-align: center;
+        // set the border
+        @include set-border-radius;
+        border-bottom: $border-width solid $border-color;
+        border-left: $border-width solid $border-color;
+        @include background-image(linear-gradient($background-gradient));
+        .author {
+          padding-bottom: 5px;
+          font-weight: bold; }
+        .date {
+          .day {
+            font-weight: bold;
+            font-size: $font-size * 1.2; }
+          .month, .year {
+            font-size: $font-size * 0.75;
+            display: inline; } }
+        .time {
+          font-size: $font-size * 0.75;
+          .hour {
+            display: inline;
+            margin-right: -4px;
+            &:after {
+              content: ":"; } }
+          .minute {
+            display: inline; } } } } }
+  #footer {
+    padding: 1em;
+    overflow: hidden;
+    font-size: $font-size * 0.85;
+    @include set-border-with-radius;
+    p {
+      text-align: center; } } }

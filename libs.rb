@@ -7,6 +7,7 @@ require 'haml'
 require 'sass'
 require 'compass'
 require 'sinatra'
+require 'sinatra/support'
 
 # markups
 require 'redcloth'

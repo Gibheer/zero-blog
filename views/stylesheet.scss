@@ -1,4 +1,46 @@
-body {
-  color: white;
-  background: black;
-}
+//colors
+$font-color1: hsl(0, 0%, 95%);
+$link-color1: hsl(32, 100%, 50%);
+$highlight-color1: hsl(204, 33%, 45%);
+$highlight-gradient: color-stops(lighten($highlight-color1, 5), $highlight-color1 30%, darken($highlight-color1, 15));
+$border-color: black;
+$background1: hsl(204, 25%, 35%);
+$background2: hsl(0, 0%, 20%);
+$background-gradient: color-stops(lighten($background1, 5), $background1 25%, darken($background1, 5));
+
+// font
+$font-size: 100%;
+$font-size-base: 14px;
+$font-family: "DejaVu Sans", Verdana, Arial, sans-serif;
+$font-family-code: monospace;
+
+//$font-family: 'Droid Serif', 'DejaVu Serif', 'Bitstream Vera Serif', Serif
+//$font-family-code: 'Droid Mono', 'Courier New', 'Terminal', monospace
+// sizes
+// -- body
+$body-min-width: 400px;
+$body-max-width: 900px;
+$top-gap: 95px;
+
+// -- border stuff
+$border-width: 1px;
+$border-radius: 4px;
+
+//imports
+@import "compass/reset";
+@import "compass/css3";
+@import "compass/utilities";
+
+// build own mixins
+@mixin set-border {
+  border: $border-width solid $border-color; }
+
+@mixin set-border-radius {
+  @include border-radius($border-radius, $border-radius); }
+
+@mixin set-border-with-radius {
+  @include set-border;
+  @include set-border-radius; }
+
+@import "base";
+@import "coderay";
