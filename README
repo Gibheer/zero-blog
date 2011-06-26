@@ -1,0 +1,15 @@
+zero-blog
+=========
+
+After using jekyll for some time we decided, that it was not what we were looking
+for. The idea itself was good, but it made writing blogs without a larger screen
+impossible.
+
+That's why we write our own blog system now. It stores the posts in a database
+and will have an admin panel. That way, it's possible to write an entry from the
+phone too.
+
+Until now, it does not have many features apart from using datamapper and it
+will likely not be the blog system you are looking for, without making some
+changes for yourself, like the structure for the posts or the design. But maybe
+you can build another system out of it.
