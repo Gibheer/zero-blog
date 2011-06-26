@@ -1,0 +1,22 @@
+Compass.configuration do |config|
+  config.sass_dir = 'views'
+  config.project_path = File.dirname(__FILE__)
+  config.output_style = :expanded
+end
+
+$settings = {
+  :environment     => :development,
+  :logging         => true,
+  :method_override => true,
+  :sass => {
+    :style => :expanded
+  }
+}
+
+DataMapper::Logger.new($stdout, :debug) if $settings[:logging]
+case $settings[:environment]
+  when :development then
+    DataMapper.setup(
+      :default, 'postgres://<user>:<passphrase>@localhost/<database>'
+    )
+end
