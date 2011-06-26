@@ -7,6 +7,10 @@ require 'haml'
 require 'sass'
 require 'compass'
 require 'sinatra'
+
+# markups
+require 'redcloth'
+
 require 'settings'
 
 # load the models
