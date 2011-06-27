@@ -8,6 +8,7 @@ require 'sass'
 require 'compass'
 require 'sinatra'
 require 'sinatra/support'
+require 'rack-flash'
 
 # markups
 require 'redcloth'

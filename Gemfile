@@ -2,6 +2,7 @@ source :rubygems
 
 gem 'sinatra'
 gem 'sinatra-support'
+gem 'rack-flash'
 gem 'haml'
 gem 'sass'
 gem 'compass'
