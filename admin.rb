@@ -37,7 +37,8 @@ class Admin < Sinatra::Base
   end
 
   get '/logout' do
-    session = nil
+    session[:id] = nil
+    session[:last_updated] = nil
     flash.notice = 'Logout complete'
     redirect '/' 
   end
