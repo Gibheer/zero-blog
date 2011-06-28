@@ -1,6 +1,6 @@
 class Admin < Sinatra::Base
   set $settings
-  enable :sessions
+  use Rack::Session::Pool, :expire_after => 1800
   use Rack::Flash, :accessorize => [:error, :warning, :notice]
   set :haml, :layout => :admin_layout
 
