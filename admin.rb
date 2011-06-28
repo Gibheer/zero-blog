@@ -4,13 +4,17 @@ class Admin < Sinatra::Base
   use Rack::Flash, :accessorize => [:error, :warning, :notice]
   set :haml, :layout => :admin_layout
 
+  before do
+    @account = session_read
+  end
+
   before %r{^(?!\/(login)?$)} do
-    if session_valid?
-      session[:last_updated] = Time.now
-      flash.notice = 'session is valid!'
-    else
+    if @account.nil?
       flash.notice = 'something is wrong'
       redirect '/admin'
+    else
+      session[:last_updated] = Time.now
+      flash.notice = 'session is valid!'
     end
   end
 
@@ -48,17 +52,12 @@ class Admin < Sinatra::Base
   end
 
   helpers do
-    def session_valid?
-      if session.has_key?(:id) && session.has_key?(:last_updated)
-        account = Account.find(session[:id])
-        if account && Time.now - session[:last_updated] < 1800
-          @account = account
-          true
-        else
-          false
-        end
+    def session_read
+      if (session.has_key?(:id) && session.has_key?(:last_updated) &&
+          Time.now - session[:last_updated] < 1800)
+        Account.get(session[:id])
       else
-        false
+        nil
       end
     end
   end
