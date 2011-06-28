@@ -4,7 +4,7 @@ class Post
 
   property :id,       Serial
   property :title,    Text,    :required => true
-  property :written,  Time,    :default => lambda { Time.now }
+  property :written,  Time,    :default => (lambda { Time.now })
   property :released, Boolean, :default => false
   property :markup,   Text,    :default => 'textile'
   property :content,  Text
