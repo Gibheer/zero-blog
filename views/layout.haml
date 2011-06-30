@@ -12,5 +12,8 @@
         %a{:href => '/admin'}='Adminpanel'
       =yield
     %footer#footer="ein footer"
-    %script
-      ="head.js('http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', '/public/app.js')"
+    :javascript
+      head.js(
+        'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js',
+        '/public/app.js'
+      )
