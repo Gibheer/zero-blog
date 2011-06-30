@@ -2,4 +2,4 @@
   %article
     %header
       %h1=post.title
-    %section.content=textile(post.content)
+    %section.content=markup(post.content, post.markup)

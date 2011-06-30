@@ -11,3 +11,4 @@ gem 'dm-postgres-adapter'
 
 # the different markups
 gem 'RedCloth'
+gem 'rdiscount'
