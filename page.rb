@@ -30,4 +30,13 @@ class Blog < Sinatra::Base
   def link_to display, link
     "<a href=\"${link}\">#{display}</a>"
   end
+
+  def markup content, markup
+    markup= markup.to_sym
+    if respond_to? markup
+      send markup, content
+    else
+      content
+    end
+  end
 end
