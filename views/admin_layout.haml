@@ -15,5 +15,8 @@
       -unless flash.notice.nil?
         %p.notice=flash.notice
     #content=yield
-    %script
-      ="head.js('http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js','/public/admin.js')"
+    :javascript
+      head.js(
+        'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js',
+        '/public/admin.js'
+      )

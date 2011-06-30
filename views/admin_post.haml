@@ -1,0 +1,33 @@
+%a{:href => '/admin/post'}="Back"
+-if flash[:errors].nil?
+  -@post.errors.each do |error|
+    .error=error
+%form{:action => "/admin/post/#{@post.id}", :method => :post}
+  .title
+    %label{:for => :post_title}="Title"
+    %input{:id => :post_title,
+      :name => 'post[title]',
+      :value => @post.title}
+  .author
+    %label{:for => :post_author}="Author"
+    %select{:name => 'post[account_id]', :id => :post_author}
+      -Account.all(:order => [:id]).each do |account|
+        -if @post.account == account
+          %option{:value => account.id, :selected => :selected}
+            =account.username
+        -else
+          %option{:value => account.id}=account.username
+  .written
+    %label{:for => :post_written}="written"
+    %input{:id => :post_written,
+      :name => 'post[written]', :value => @post.written}
+  .released
+    %label{:for => :post_released}="released"
+    %input{:type => :checkbox, :name => 'post[released]',
+      :class => "post-released-#{@post.released}", :value => 0,
+      :checked => @post.released, :id => :post_released}
+  %textarea.content{:name => 'post[content]'}=@post.content
+  .buttons
+    %button{:type => :submit}="Update"
+    %button{:type => :submit, :formmethod => :get,
+      :formaction => '/admin/post'}="Back"

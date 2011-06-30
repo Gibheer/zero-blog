@@ -1,0 +1,6 @@
+-@posts.each do |post|
+  .post
+    %p.title
+      %a{:href => "./post/#{post.id}"}=post.title
+    %span.released{:class => "post-released-#{post.released}"}
+    %span.written=post.written

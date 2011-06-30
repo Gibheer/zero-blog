@@ -1,2 +1,10 @@
 %a{:href => '/admin/logout'}="Logout"
 %h1="Index"
+#posts
+  %a{:href => '/admin/post'}="Posts"
+  -@account.posts.all(:order => [:written.desc]).each do |post|
+    .post
+      %p.title
+        %a{:href => "/admin/post/#{post.id}"}=post.title
+      %span.released{:class => "post-released-#{post.released}"}
+      %span.written=post.written

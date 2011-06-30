@@ -1,0 +1,17 @@
+#messages {
+  .message {
+    border: 1px solid black;
+  }
+  .error {
+    @extend .message;
+    background-color: red;
+  }
+  .warning {
+    @extend .message;
+    background-color: orange;
+  }
+  .notice {
+    @extend .message;
+    background-color: green;
+  }
+}
