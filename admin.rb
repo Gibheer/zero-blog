@@ -4,7 +4,7 @@ class Admin < Sinatra::Base
   use Rack::Flash, :accessorize => [:error, :warning, :notice]
   set :haml, :layout => :admin_layout
 
-  get '/index' do
+  get '/' do
     haml :admin_index
   end
 
@@ -61,7 +61,7 @@ class Admin < Sinatra::Base
     end
   end
 
-  get '/' do
+  get '/login' do
     haml :admin_index_no_login
   end
 
@@ -118,11 +118,11 @@ class Admin < Sinatra::Base
     @account = session_read
   end
 
-  before %r{^(?!\/(login|stylesheet\.css)?$)} do
+  before %r{^(?!\/(login|stylesheet\.css)+$)} do
     if @account.nil?
       flash.warning = 'You are not logged in!'
       session[:to_path] = request.path_info
-      redirect '/admin'
+      redirect '/admin/login'
     else
       session[:last_updated] = Time.now
     end
