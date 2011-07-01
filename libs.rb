@@ -12,7 +12,7 @@ require 'rack-flash'
 
 # markups
 require 'redcloth'
-require 'rdiscount'
+require 'redcarpet'
 
 require 'settings'
 
