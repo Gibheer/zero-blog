@@ -1,0 +1,10 @@
+-unless @post.errors.nil?
+  -@post.errors.each do |error|
+    .error=error
+%form{:action => "/admin/post/#{@post.id}", :method => :post}
+  .fields
+    =haml :admin_post_edit, :layout => nil
+    .buttons
+      %button{:type => :submit}="Update"
+      %button{:type => :submit, :formmethod => :get,
+        :formaction => '/admin/post'}="Back"

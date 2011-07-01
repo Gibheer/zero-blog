@@ -13,10 +13,27 @@ class Admin < Sinatra::Base
     haml :admin_posts
   end
 
+  get '/post/new' do
+    @post = Post.new
+    haml :admin_post_create
+  end
+
+  put '/post' do
+    @post = Post.new(params[:post])
+    if @post.save
+      flash.notice = 'Post saved'
+      redirect "/admin/post/#{@post.id}"
+    else
+      flash.error = 'Error at saving the post'
+      flash[:errors] = @post.errors
+      redirect "/admin/post/new"
+    end
+  end
+
   get '/post/:id' do
     @post = Post.get(params[:id])
     if @post
-      haml :admin_post
+      haml :admin_post_change
     else
       flash.warning = "Post with id #{params[:id]} not found!"
       redirect './post'
@@ -37,26 +54,11 @@ class Admin < Sinatra::Base
         flash.warning = 'Error at saving the post!'
         flash[:errors] = true
       end
-      haml :admin_post
+      haml :admin_post_change
     else
       flash.warning = "Post with id #{params[:id]} not found!"
       redirect './post'
     end
-  end
-
-  get '/post/new' do
-    haml :admin_post_new
-  end
-
-  put '/post' do
-    @post = Post.new(param[:post])
-    if @post.save
-      flash.notice = 'Post saved'
-    else
-      flash.error = 'Error at saving the post'
-      flash[:errors] = @post.errors
-    end
-    haml :admin_post_new
   end
 
   get '/' do

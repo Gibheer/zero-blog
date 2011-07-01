@@ -1,7 +1,3 @@
-%a{:href => '/admin/post'}="Back"
--if flash[:errors].nil?
-  -@post.errors.each do |error|
-    .error=error
 %form{:action => "/admin/post/#{@post.id}", :method => :post}
   .title
     %label{:for => :post_title}="Title"
@@ -27,7 +23,3 @@
       :class => "post-released-#{@post.released}", :value => 0,
       :checked => @post.released, :id => :post_released}
   %textarea.content{:name => 'post[content]'}=@post.content
-  .buttons
-    %button{:type => :submit}="Update"
-    %button{:type => :submit, :formmethod => :get,
-      :formaction => '/admin/post'}="Back"
