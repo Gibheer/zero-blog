@@ -79,7 +79,7 @@ class Admin < Sinatra::Base
       if session.has_key? :to_path
         redirect "/admin#{session.delete(:to_path)}"
       else
-        redirect '/admin/index'
+        redirect '/admin/'
       end
     end
   end
