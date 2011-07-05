@@ -10,4 +10,5 @@ class Post
   property :content,  Text
 
   belongs_to :account
+  has n, :comments
 end

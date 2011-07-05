@@ -20,6 +20,7 @@ require 'settings'
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__)) + '/models'
 require 'account'
 require 'post'
+require 'comment'
 
 DataMapper.finalize
 

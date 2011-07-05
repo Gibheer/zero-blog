@@ -15,11 +15,16 @@ storm = Account.new(
 )
 storm.save
 
-storm.posts.new(:title => 'bar', :content => 'das ist mein post!').save
-gib.posts.new(:title => 'foo', :content => 'das ist meiner',
-              :released => true).save
-gib.posts.new(:title => 'lala', :content => 'lorem ipsum und so rum').save
-storm.posts.new(:title => 'erster!', :content => 'ich bin *ganz* oben!',
+storm.posts.new(:title => 'bar', :content => 'this is my post!').save
+gib.posts.new(:title => 'foo', :content => 'this is mine!', :released => true).save
+gib.posts.new(:title => 'lala', :content => 'lorem ipsum in the round about').save
+storm.posts.new(:title => 'first!', :content => 'i\'m at the top!',
                 :released => true).save
-gib.posts.new(:title => 'mit markdown', :content => 'das ist `code` und so',
+Post.last.comments.new(:author => 'Gibheer', :email => 'foo@bar.com',
+                       :acknowledged => true, :body => 'ipsum ipsum ipsum')
+gib.posts.new(:title => 'with markdown', :content => 'this is some `code`',
               :markup => 'markdown', :released => true).save
+Post.last.comments.new(:author => 'Gibheer', :email => 'foo@bar.com',
+                       :acknowledged => false, :body => 'lorem lorem ipsum')
+Post.last.comments.new(:author => 'Stormwind', :email => 'bar@foo.com',
+                       :acknowledged => true, :body => 'lorem ipsum')
