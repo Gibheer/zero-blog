@@ -12,4 +12,14 @@ class Comment
   validates_presence_of :author, :email, :body
   validates_length_of   :email,  :min => 3, :max => 100
   validates_format_of   :email,  :with => :email_address
+
+  # overwrite the default to_json, because we don't need all fields
+  def to_json ressource_options
+    {
+      :id => id,
+      :post_id => post.id,
+      :author => author,
+      :body => body
+    }
+  end
 end

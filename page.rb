@@ -19,6 +19,10 @@ class Blog < Sinatra::Base
     end
   end
 
+  get '/post/:id/comment.json' do
+    Post.get_released(params[:id]).acknowledged_comments.to_json
+  end
+
   get '/stylesheet.css' do
     scss :stylesheet
   end

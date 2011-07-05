@@ -15,4 +15,8 @@ class Post
   def self.get_released id
     first(:id => id, :released => true)
   end
+
+  def acknowledged_comments
+    comments(:acknowledged => true)
+  end
 end
