@@ -1,0 +1,7 @@
+%article
+  %header
+    %h1=@post.title
+  %footer
+    .author=@post.account.username
+    .date=@post.written
+  %section=markup(@post.content, @post.markup)
