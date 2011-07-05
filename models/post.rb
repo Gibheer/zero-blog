@@ -16,6 +16,10 @@ class Post
     first(:id => id, :released => true)
   end
 
+  def self.find_of_day time
+    all(:written => time..(time+86400))
+  end
+
   def acknowledged_comments
     comments(:acknowledged => true)
   end

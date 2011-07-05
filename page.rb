@@ -9,6 +9,20 @@ class Blog < Sinatra::Base
     haml :index
   end
 
+  get '/:year/:month/:day/:title.html' do
+    @post = Post.find_of_day(
+      Time.mktime(params[:year], params[:month], params[:day])
+    ).select do |post|
+      params[:title] == post.title.gsub(/ /, '_').downcase
+    end
+    if @post.count > 0
+      @post = @post[0]
+      haml :post_single
+    else
+      404
+    end
+  end
+
   get '/post/:id' do
     @post = Post.get_released(params[:id])
     if @post.nil?
