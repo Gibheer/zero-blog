@@ -1,19 +1,24 @@
 !!! 5
 %html
   %head
-    %title="zero-knowledge"
+    %title="zero-knowledge - scripte, programmieren und administrtieren"
+    %meta{:'http-equiv' => 'Content-Type', :content => 'text/html; charset=utf-8'}
     %link{:rel => 'stylesheet', :href => '/stylesheet.css', :type => 'text/css'}
     %script{:src => 'public/head.min.js'}
+    %link{:rel => 'alternate', :type => 'application/atom+xml', :href => 'http://zero-knowledge.org/atom.xml', :title => 'Atom 1.0'}
   %body
-    %header#header
-      %h1="zero-knowledge.org"
-    #content
-      %p.hint
-        %a{:href => '/admin/login'}='Adminpanel'
-      =yield
-    %footer#footer="ein footer"
-    :javascript
-      head.js(
-        'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js',
-        '/public/app.js'
-      )
+    #wrapper
+      %header#header
+        %h1
+          %a{:href =>"http://zero-knowledge.org"}
+            %img{:src => "http://zero-knowledge.org/images/zero-knowledge.png", :alt => "zero-knowledge"}
+          %img{:style => "float:right", :src => "http://zero-knowledge.org/images/blub.png", :alt => "Logo"}
+      #content
+        =yield
+      %footer#footer
+        %p="Design and Content &#169; 2011 by Gibheer and Stormwind"
+      :javascript
+        head.js(
+          'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js',
+          '/public/app.js'
+        )
