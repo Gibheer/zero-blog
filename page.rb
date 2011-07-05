@@ -1,10 +1,22 @@
 class Blog < Sinatra::Base
   set $settings
   register Sinatra::CompassSupport
+  use Rack::Session::Pool, :expire_after => 1800
+  use Rack::Flash, :accessorize => [:error, :warning, :notice]
 
   get '/' do
     @posts = Post.all(:released => true, :order => [:written.desc])
     haml :index
+  end
+
+  get '/post/:id' do
+    @post = Post.get_released(params[:id])
+    if @post.nil?
+      flash.warning = 'Post not found!'
+      redirect '/'
+    else
+      haml :post_single
+    end
   end
 
   get '/stylesheet.css' do

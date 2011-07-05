@@ -11,4 +11,8 @@ class Post
 
   belongs_to :account
   has n, :comments
+
+  def self.get_released id
+    first(:id => id, :released => true)
+  end
 end
