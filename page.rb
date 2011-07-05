@@ -12,8 +12,7 @@ class Blog < Sinatra::Base
   get '/post/:id' do
     @post = Post.get_released(params[:id])
     if @post.nil?
-      flash.warning = 'Post not found!'
-      redirect '/'
+      404
     else
       haml :post_single
     end
