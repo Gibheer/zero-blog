@@ -21,10 +21,10 @@ gib.posts.new(:title => 'lala', :content => 'lorem ipsum in the round about').sa
 storm.posts.new(:title => 'first!', :content => 'i\'m at the top!',
                 :released => true).save
 Post.last.comments.new(:author => 'Gibheer', :email => 'foo@bar.com',
-                       :acknowledged => true, :body => 'ipsum ipsum ipsum')
+                       :acknowledged => true, :body => 'ipsum ipsum ipsum').save
 gib.posts.new(:title => 'with markdown', :content => 'this is some `code`',
               :markup => 'markdown', :released => true).save
 Post.last.comments.new(:author => 'Gibheer', :email => 'foo@bar.com',
-                       :acknowledged => false, :body => 'lorem lorem ipsum')
+                       :acknowledged => false, :body => 'lorem lorem ipsum').save
 Post.last.comments.new(:author => 'Stormwind', :email => 'bar@foo.com',
-                       :acknowledged => true, :body => 'lorem ipsum')
+                       :acknowledged => true, :body => 'lorem ipsum').save
