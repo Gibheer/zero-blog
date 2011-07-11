@@ -5,7 +5,11 @@ class Blog < Sinatra::Base
   use Rack::Flash, :accessorize => [:error, :warning, :notice]
 
   get '/' do
-    @posts = Post.all(:released => true, :order => [:written.desc])
+    if params.has_key? 'page'
+      @posts = Post.get_page(params['page'].to_i)
+    else
+      @posts = Post.get_page()
+    end
     haml :index
   end
 
