@@ -15,6 +15,14 @@ storm = Account.new(
 )
 storm.save
 
+(1..50).each do |i|
+  gib.posts.new(:title => "post #{i}", :content => "content of post #{i}",
+                :released => true).save
+end
+(1..50).each do |i|
+  storm.posts.new(:title => "post #{i}", :content => "content of post #{i}",
+                :released => true).save
+end
 storm.posts.new(:title => 'bar', :content => 'this is my post!').save
 gib.posts.new(:title => 'foo', :content => 'this is mine!', :released => true).save
 gib.posts.new(:title => 'lala', :content => 'lorem ipsum in the round about').save
