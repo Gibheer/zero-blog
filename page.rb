@@ -6,10 +6,12 @@ class Blog < Sinatra::Base
 
   get '/' do
     if params.has_key? 'page'
-      @posts = Post.get_page(params['page'].to_i)
+      @current_page = params['page'].to_i
     else
-      @posts = Post.get_page()
+      @current_page = 1
     end
+    @page_count = Post.page_count
+    @posts = Post.get_page(@current_page - 1)
     haml :index
   end
 

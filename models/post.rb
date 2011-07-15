@@ -16,9 +16,17 @@ class Post
     first(:id => id, :released => true)
   end
 
+  def self.get_all_released
+    all(:released => true)
+  end
+
   def self.get_page page=0
-    all(:released => true, :limit => 10, :offset => (page * 10 + 1),
+    get_all_released.all(:limit => 10, :offset => (page * 10 + 1),
         :order => [:written.desc])
+  end
+
+  def self.page_count
+    (get_all_released.count / 10).ceil
   end
 
   def self.find_of_day time

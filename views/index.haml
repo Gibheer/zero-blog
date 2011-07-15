@@ -1,5 +1,13 @@
 -@posts.each do |post|
-  %article
-    %header
-      %h1=post.title
-    %section.content=markup(post.content, post.markup)
+  -@post = post
+  =haml :post_single, :layout => nil
+.page
+  -if @current_page > 2
+    %a{:href => '/?page=1'}="<<"
+  -if @current_page > 1
+    %a{:href => "/?page=#{@current_page - 1}"}="<"
+  %span.bold=@current_page
+  -if @current_page < @page_count + 1
+    %a{:href => "/?page=#{@current_page + 1}"}=">"
+  -if @current_page < (@page_count)
+    %a{:href => "/?page=#{@page_count + 1}"}=">>"
