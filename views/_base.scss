@@ -111,7 +111,25 @@ body {
             &:after {
               content: ":"; } }
           .minute {
-            display: inline; } } } } }
+            display: inline; } } } }
+    .page {
+      text-align: center;
+      margin-bottom: 1em;
+      span.bold {
+        font-weight: bold;
+      }
+      a, span {
+        display: inline-block;
+        border: 1px solid black;
+        padding: 0.5em;
+        margin: 0;
+        width: 10%;
+        min-width: 90px;
+        @include set-border-radius;
+        @include box-sizing(border-box);
+      }
+    }
+  }
   #footer {
     padding: 1em;
     overflow: hidden;
