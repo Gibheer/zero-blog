@@ -1,6 +1,7 @@
 %article
   %header
-    %h1=@post.title
+    %h1
+      %a{:href => "/post/#{@post.id}"}=@post.title
   %footer
     .author=@post.account.username
     .date=@post.written
