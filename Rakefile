@@ -1,5 +1,6 @@
 $LOAD_PATH << File.expand_path(File.dirname(__FILE__)) + '/'
 require 'libs'
+require 'rake/functions'
 
 require 'dm-migrations'
 
@@ -23,4 +24,22 @@ end
 desc 'open a console with all libs loaded and a database connection opened'
 task :console do
   sh "irb -rubygems -I#{File.expand_path(File.dirname(__FILE__))} -r libs"
+end
+
+namespace :import do
+  desc 'import all posts from this directory'
+  task :jekyll do
+    path = ask("Where are the jekyll posts?")
+    template = ask("What is the default template? (textile, markdown, ...?)")
+    if path.nil?
+      puts "no path given! - aborting"
+    else
+      posts = Dir[path + '/*'].sort
+      if posts.empty?
+        puts "no posts in this directory"
+      else
+        import_jekyll posts, template
+      end
+    end
+  end
 end
