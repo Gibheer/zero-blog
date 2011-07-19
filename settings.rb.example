@@ -1,9 +1,3 @@
-Compass.configuration do |config|
-  config.sass_dir = 'views'
-  config.project_path = File.dirname(__FILE__)
-  config.output_style = :expanded
-end
-
 $settings = {
   :environment     => :development,
   :logging         => true,
@@ -20,3 +14,5 @@ case $settings[:environment]
       :default, 'postgres://<user>:<passphrase>@localhost/<database>'
     )
 end
+
+RedclothCoderay.coderay_options :css => :class

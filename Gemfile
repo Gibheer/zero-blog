@@ -10,5 +10,7 @@ gem 'data_mapper'
 gem 'dm-postgres-adapter'
 
 # the different markups
+gem 'redclothcoderay'
+gem 'coderay'
 gem 'RedCloth'
 gem 'redcarpet'

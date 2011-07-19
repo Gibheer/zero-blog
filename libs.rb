@@ -13,6 +13,9 @@ require 'rack-flash'
 # markups
 require 'redcloth'
 require 'redcarpet'
+require 'coderay'
+require 'redclothcoderay'
+RedclothCoderay.coderay_options :css => :class
 
 require 'settings'
 
