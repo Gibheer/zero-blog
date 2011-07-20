@@ -4,5 +4,11 @@
       %a{:href => "/post/#{@post.id}"}=@post.title
   %footer
     .author=@post.account.username
-    .date=@post.written
+    .date
+      .day=@post.written.strftime('%d')
+      .month=@post.written.strftime('%B')
+      .year=@post.written.strftime('%Y')
+    .time
+      .hour=@post.written.strftime('%H')
+      .minute=@post.written.strftime('%M')
   %section~markup(@post.content, @post.markup)
