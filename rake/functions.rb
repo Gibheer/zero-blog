@@ -6,6 +6,9 @@ def ask message
 end
 
 def import_jekyll files, template
+  # all tags used in the posts
+  template_tags = {}
+  puts "If asked about tags, please give a replacement."
   # from jekyll - lib/jekyll/convertible.rb#26 (08.2011)
   files.each do |path|
     content = File.read(path)
@@ -20,6 +23,14 @@ def import_jekyll files, template
         raise e
       end
 
+      content = content.gsub /({{.*?}})/ do |m|
+        if template_tags.has_key? $1
+          template_tags[$1]
+        else
+          template_tags[$1] = ask("Found tag \"#{$1}\" in post #{data['title']}:")
+        end
+      end
+
       post = Post.new(
         :written => data['date'],
         :released => true,
@@ -28,7 +39,9 @@ def import_jekyll files, template
         :content => content,
         :title => data['title']
       )
-      puts "post #{post.title} could not be saved! #{post.errors}" unless post.save
+      unless post.save
+        puts "post #{post.title} of file #{path} could not be saved!"
+      end
     else
       puts "No valid jekyll file #{path}"
       raise ArgumentError, "#{path} is not a jekyll file"
