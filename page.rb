@@ -1,8 +1,9 @@
 class Blog < Sinatra::Base
   set $settings
+  # never ever again load the Rack::Session::Pool here
+  # or the admin pool get's broken and you get thrown out after every request!
+  # do that in the config.ru, if you have to!
   register Sinatra::CompassSupport
-  use Rack::Session::Pool, :expire_after => 1800
-  use Rack::Flash, :accessorize => [:error, :warning, :notice]
 
   get '/' do
     if params.has_key? 'page'
@@ -67,7 +68,7 @@ class Blog < Sinatra::Base
   end
 
   def markup content, markup
-    markup= markup.to_sym
+    markup = markup.to_sym
     if respond_to? markup
       send markup, content
     else
