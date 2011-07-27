@@ -11,6 +11,7 @@ class Post
 
   belongs_to :account
   has n, :comments
+  has n, :tags, :through => Resource
 
   def self.get_released id
     first(:id => id, :released => true)

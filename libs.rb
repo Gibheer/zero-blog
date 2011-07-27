@@ -24,6 +24,7 @@ $LOAD_PATH << File.expand_path(File.dirname(__FILE__)) + '/models'
 require 'account'
 require 'post'
 require 'comment'
+require 'tag'
 
 DataMapper.finalize
 
