@@ -37,4 +37,13 @@ class Post
   def acknowledged_comments
     comments(:acknowledged => true)
   end
+
+  def has_tag tag
+    tags.each do |t|
+      if t.id == tag.id
+        return true
+      end
+    end
+    false
+  end
 end

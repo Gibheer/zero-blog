@@ -9,6 +9,14 @@
       :name => 'post[title]',
       :value => @post.title}
 .further
+  .markup
+    %label{:for => :post_markup}="markup"
+    %select{:id => :post_markup, :name => 'post[markup]'}
+      -[:markdown, :textile].each do |markup|
+        -if @post.markup.to_sym == markup
+          %option{:selected => :selected}=markup
+        -else
+          %option=markup
   .written
     %label{:for => :post_written}="written"
     %input{:id => :post_written,
@@ -30,5 +38,9 @@
   .tags
     %label{:for => :post_tags}="Tags (#{Tag.all.count})"
     %select{:name => 'post[tags]', :id => :post_tags, :size => 10, :multiple => true}
+      - post_tags = @post.tags
       - Tag.all(:order => [:name.asc]).each do |tag|
-        %option{:value => tag.id}=tag.name
+        -if @post.has_tag tag
+          %option{:selected => :selected, :value => tag.id}=tag.name
+        -else
+          %option{:value => tag.id}=tag.name
