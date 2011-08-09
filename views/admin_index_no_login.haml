@@ -1,5 +1,5 @@
-%h1="Login"
-%form{:action => '/admin/login', :method => 'post'}
+%form#login.fields{:action => '/admin/login', :method => 'post'}
+  .login="Welcome in the admin area."
   .username
     %label.block{:for => 'username'}='Username'
     %input.block{:name => 'username', :placeholder => 'username', :value => flash[:username]}

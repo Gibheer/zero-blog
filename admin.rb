@@ -3,13 +3,14 @@ class Admin < Sinatra::Base
   use Rack::Session::Pool, :expire_after => 1800
   use Rack::Flash, :accessorize => [:error, :warning, :notice]
   set :haml, :layout => :admin_layout
+  register Sinatra::CompassSupport
 
   get '/' do
     haml :admin_index
   end
 
   get '/post' do
-    @posts = Post.all(:order => [:id.desc])
+    @posts = Post.all(:order => [:id.desc], :limit => 15)
     haml :admin_posts
   end
 
@@ -88,7 +89,7 @@ class Admin < Sinatra::Base
     session[:id] = nil
     session[:last_updated] = nil
     flash.notice = 'Logout complete'
-    redirect '/' 
+    redirect '/'
   end
 
   get '/stylesheet.css' do
@@ -111,6 +112,15 @@ class Admin < Sinatra::Base
         new_hash[k.to_sym] = v
       end
       hash = new_hash
+    end
+
+    def markup content, markup
+      markup = markup.to_sym
+      if respond_to? markup
+        send markup, content
+      else
+        content
+      end
     end
   end
 

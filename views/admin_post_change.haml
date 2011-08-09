@@ -4,7 +4,9 @@
 %form{:action => "/admin/post/#{@post.id}", :method => :post}
   .fields
     =haml :admin_post_edit, :layout => nil
-    .buttons
-      %button{:type => :submit}="Update"
-      %button{:type => :submit, :formmethod => :get,
-        :formaction => '/admin/post'}="Back"
+  .buttons
+    %button{:type => :submit}="Update"
+    %button{:type => :submit, :formmethod => :get,
+      :formaction => '/admin/post'}="Back"
+
+~haml :post_single, :layout => nil

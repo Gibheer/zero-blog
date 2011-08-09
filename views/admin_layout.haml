@@ -2,11 +2,18 @@
 %html
   %head
     %title="zero-knowledge - Adminpanel"
-    %link{:rel => 'stylesheet', :href => '/stylesheet.css', :type => 'text/css'}
     %link{:rel => 'stylesheet', :href => '/admin/stylesheet.css', :type => 'text/css'}
     %script{:src => '/public/head.min.js'}
   %body
-    #menu="Menue"
+    #menu
+      %ul
+        %li
+          %a{:href => '/'}="main"
+        %li
+          %a{:href => '/admin'}="admin"
+        -if @account
+          %li
+            %a{:href => '/admin/new'}="create"
     #messages
       -unless flash.error.nil?
         %p.error=flash.error
