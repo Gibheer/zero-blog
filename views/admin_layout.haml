@@ -13,7 +13,9 @@
           %a{:href => '/admin'}="admin"
         -if @account
           %li
-            %a{:href => '/admin/new'}="create"
+            %a{:href => '/admin/post/new'}="create"
+          %li
+            %a{:href => '/admin/tag'}="tags"
     #messages
       -unless flash.error.nil?
         %p.error=flash.error

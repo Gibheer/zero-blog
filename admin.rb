@@ -62,6 +62,40 @@ class Admin < Sinatra::Base
     end
   end
 
+  # tags
+  get '/tag' do
+    @tags = Tag.all(:order => [:name.asc])
+    haml :admin_tag_index
+  end
+
+  put '/tag/new' do
+    @tag = Tag.new(:name => params['tag']['name'])
+    if @tag.save
+      flash[:notice] = "Tag '#{@tag.name}' created!"
+    else
+      flash[:warning] = "Tag '#{@tag.name} could not be created! Error was: '#{@tag.errors.first}'"
+    end
+    redirect '/admin/tag'
+  end
+
+  get '/tag/:id' do
+    @tag = Tag.first(:id => params[:id])
+    haml :admin_tag_edit
+  end
+
+  post '/tag/:id' do
+    @tag = Tag.first(:id => params[:id])
+    @tag.name = params['tag']['name']
+    if @tag.save
+      flash[:notice] = "Tag saved"
+      redirect '/admin/tag'
+    else
+      flash[:notice] = "Tag could not be saved! Message: '#{@tag.errors.first}'"
+      haml :admin_tag_edit
+    end
+  end
+
+  # login
   get '/login' do
     haml :admin_index_no_login
   end

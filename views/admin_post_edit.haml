@@ -28,7 +28,7 @@
         -else
           %option{:value => account.id}=account.username
   .tags
-    %label{:for => :post_tags}="Tags"
+    %label{:for => :post_tags}="Tags (#{Tag.all.count})"
     %select{:name => 'post[tags]', :id => :post_tags, :size => 10, :multiple => true}
-      - Tag.all.each do |tag|
+      - Tag.all(:order => [:name.asc]).each do |tag|
         %option{:value => tag.id}=tag.name

@@ -1,0 +1,9 @@
+%form{:action => "/admin/tag/new", :method => :post}
+  %input{:type => :hidden, :name => '_method', :value => 'put'}=""
+  .fields
+    %input{:name => 'tag[name]', :placeholder => 'new tag name'}=""
+  .buttons
+    %button{:type => :submit}="create"
+- @tags.each do |tag|
+  .tag
+    %a{:href => "/admin/tag/#{tag.id}"}=tag.name

@@ -8,7 +8,8 @@ end
 def import_jekyll files, template
   # all tags used in the posts
   template_tags = {}
-  puts "If asked about tags, please give a replacement."
+  post_tags = {}
+  puts "If asked about template tags, please give a replacement."
   # from jekyll - lib/jekyll/convertible.rb#26 (08.2011)
   files.each do |path|
     content = File.read(path)
@@ -39,12 +40,27 @@ def import_jekyll files, template
         :content => content,
         :title => data['title']
       )
-      unless post.save
+      if post.save
+        data['tags'].each do |t|
+          if (post_tags.has_key? t)
+            post_tags[t] << post
+          else
+            post_tags[t] = [post]
+          end
+        end
+      else
         puts "post #{post.title} of file #{path} could not be saved!"
       end
     else
       puts "No valid jekyll file #{path}"
       raise ArgumentError, "#{path} is not a jekyll file"
+    end
+  end
+  if post_tags.count > 0
+    post_tags.each do |tag_name, posts|
+      tag = Tag.new(:name => tag_name)
+      tag.posts = posts
+      tag.save
     end
   end
 end
