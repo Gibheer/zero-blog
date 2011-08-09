@@ -43,6 +43,11 @@ class Blog < Sinatra::Base
     Post.get_released(params[:id]).acknowledged_comments.to_json
   end
 
+  get '/atom.xml' do
+    @posts = Post.get_page(0)
+    haml :atom, :layout => false
+  end
+
   get '/stylesheet.css' do
     scss :stylesheet
   end

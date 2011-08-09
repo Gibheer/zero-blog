@@ -1,0 +1,16 @@
+!!! XML
+%feed{:xmlns => 'http://www.w3.org/2005/Atom'}
+  %title="zero-knowledge"
+  %subtitle="scripting, programming and administrating"
+  %link{:href => '/'}
+  %link{:type => 'application/atom+xml', :rel => "self", :href => '/atom.xml'}
+  -@posts.each do |post|
+    %entry
+      %id="/post/#{post.id}"
+      %link{:type => 'text/html', :rel => "alternate", :href => "/post/#{post.id}"}
+      %title=post.title
+      %updated=post.written
+      %author
+        %name=post.account.username
+      %summary{:type => 'html'}=markup(post.content, post.markup).match(/.*?<\/p>/m)[0]
+      %content{:type => 'html'}=markup(post.content, post.markup)
