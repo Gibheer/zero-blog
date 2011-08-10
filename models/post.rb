@@ -22,7 +22,7 @@ class Post
   end
 
   def self.get_page page=0
-    get_all_released.all(:limit => 10, :offset => (page * 10 + 1),
+    get_all_released.all(:limit => 10, :offset => (page * 10),
         :order => [:written.desc])
   end
 
