@@ -14,3 +14,7 @@ gem 'redclothcoderay'
 gem 'coderay'
 gem 'RedCloth'
 gem 'redcarpet'
+
+group :install do
+  gem 'highline'
+end
