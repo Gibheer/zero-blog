@@ -20,7 +20,11 @@ class Admin < Sinatra::Base
   end
 
   put '/post' do
-    @post = Post.new(params[:post])
+    @post = Post.new
+    if params[:post].has_key? 'tags'
+      @post.set_tags params[:post].delete('tags')
+    end
+    @post.update(params[:post])
     if @post.save
       flash.notice = 'Post saved'
       redirect "/admin/post/#{@post.id}"
@@ -52,12 +56,7 @@ class Admin < Sinatra::Base
     @post = Post.get(params[:id])
     if @post
       if params[:post].has_key? 'tags'
-        params[:post]['tags'].each do |tag_string|
-          tag = Tag.first(:id => tag_string)
-          @post.tags << tag
-        end
-        params[:post].delete 'tags'
-        puts params.inspect
+        @post.set_tags params[:post].delete('tags')
       end
       unless @post.update(params[:post])
         flash.warning = 'Error at saving the post!'

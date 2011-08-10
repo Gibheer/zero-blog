@@ -29,8 +29,10 @@
   .author
     %label{:for => :post_author}="Author"
     %select{:name => 'post[account_id]', :id => :post_author}
+      -if @post.account.nil?
+        -@post.account = @account
       -Account.all(:order => [:id]).each do |account|
-        -if @post.account == account
+        -if @post.account.id == account.id
           %option{:value => account.id, :selected => :selected}
             =account.username
         -else

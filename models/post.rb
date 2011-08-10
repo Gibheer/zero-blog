@@ -38,6 +38,7 @@ class Post
     comments(:acknowledged => true)
   end
 
+  # checks if a post has this tag
   def has_tag tag
     tags.each do |t|
       if t.id == tag.id
@@ -45,5 +46,13 @@ class Post
       end
     end
     false
+  end
+
+  # sets all tags for this post
+  def set_tags tags
+    @post.tags = []
+    tags.each do |tag_id|
+      @post.tags << Tag.first(:id => tag_id)
+    end
   end
 end
