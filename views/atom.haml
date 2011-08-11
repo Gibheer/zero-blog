@@ -2,15 +2,17 @@
 %feed{:xmlns => 'http://www.w3.org/2005/Atom'}
   %title="zero-knowledge"
   %subtitle="scripting, programming and administrating"
-  %link{:href => '/'}
-  %link{:type => 'application/atom+xml', :rel => "self", :href => '/atom.xml'}
+  %link{:href => 'http://zero-knowledge.org/'}
+  %link{:type => 'application/atom+xml', :rel => "self", :href => 'http://zero-knowledge.org/atom.xml'}
+  %updated=Post.get_all_released.last.written.xmlschema
+  %id='http://zero-knowledge.org/'
   -@posts.each do |post|
     %entry
-      %id="/post/#{post.id}"
+      %id="http://zero-knowledge.org/post/#{post.id}"
       %link{:type => 'text/html', :rel => "alternate", :href => "/post/#{post.id}"}
       %title=post.title
-      %updated=post.written
+      %updated=post.written.xmlschema
       %author
         %name=post.account.username
-      %summary{:type => 'html'}=markup(post.content, post.markup).match(/.*?<\/p>/m)[0]
-      %content{:type => 'html'}=markup(post.content, post.markup)
+      %summary{:type => 'html'}=markup(post.content, post.markup).match(/.*?<\/p>/m)[0].gsub(/</, '&lt;').gsub(/>/, '&gt;')
+      %content{:type => 'html'}=markup(post.content, post.markup).gsub(/</, '&lt;').gsub(/>/, '&gt;')
