@@ -49,10 +49,10 @@ class Post
   end
 
   # sets all tags for this post
-  def set_tags tags
-    @post.tags = []
-    tags.each do |tag_id|
-      @post.tags << Tag.first(:id => tag_id)
+  def set_tags new_tags
+    tags = []
+    new_tags.each do |tag_id|
+      tags << Tag.first(:id => tag_id)
     end
   end
 end

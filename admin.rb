@@ -20,11 +20,13 @@ class Admin < Sinatra::Base
   end
 
   put '/post' do
-    @post = Post.new
     if params[:post].has_key? 'tags'
-      @post.set_tags params[:post].delete('tags')
+      tags = params[:post].delete('tags')
+    else
+      tags = []
     end
-    @post.update(params[:post])
+    @post = Post.new params[:post]
+    @post.set_tags tags
     if @post.save
       flash.notice = 'Post saved'
       redirect "/admin/post/#{@post.id}"
