@@ -14,7 +14,7 @@ class Post
   has n, :tags, :through => Resource
 
   def self.get_released id
-    get_all_released.first(:id => id)
+    get_all_released.get(id)
   end
 
   def self.get_all_released
