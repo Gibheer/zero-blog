@@ -14,7 +14,7 @@ class Post
   has n, :tags, :through => Resource
 
   def self.get_released id
-    first(:id => id, :released => true)
+    get_all_released.first(:id => id)
   end
 
   def self.get_all_released
@@ -31,7 +31,7 @@ class Post
   end
 
   def self.find_of_day time
-    all(:written => time..(time+86400), :releaed => true)
+    get_all_released.all(:written => time..(time+86400))
   end
 
   def acknowledged_comments
