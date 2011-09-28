@@ -31,7 +31,7 @@ class Post
   end
 
   def self.find_of_day time
-    get_all_released.all(:written => time..(time+86400))
+    get_all_released.all_written(time..(time+86400))
   end
 
   def acknowledged_comments
