@@ -46,9 +46,6 @@ class Post
 
   # sets all tags for this post
   def set_tags new_tags
-    tags = []
-    new_tags.each do |tag_id|
-      tags << Tag.first(:id => tag_id)
-    end
+    self.tags = Tag.all(:id => new_tags)
   end
 end

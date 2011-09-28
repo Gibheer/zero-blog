@@ -58,9 +58,12 @@ class Admin < Sinatra::Base
     @post = Post.get(params[:id])
     if @post
       if params[:post].has_key? 'tags'
-        @post.set_tags params[:post].delete('tags')
+        tags = params[:post].delete('tags')
       end
-      unless @post.update(params[:post])
+      if @post.update(params[:post])
+        @post.set_tags tags
+        @post.save
+      else
         flash.warning = 'Error at saving the post!'
         flash[:errors] = true
       end
