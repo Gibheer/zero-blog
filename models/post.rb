@@ -40,12 +40,8 @@ class Post
 
   # checks if a post has this tag
   def has_tag tag
-    tags.each do |t|
-      if t.id == tag.id
-        return true
-      end
-    end
-    false
+    tag_id = tag.id
+    tags.any? { |t| t.id == tag_id }
   end
 
   # sets all tags for this post
