@@ -80,4 +80,16 @@ class Blog < Sinatra::Base
       content
     end
   end
+
+  def domain path = ''
+    $settings[:domain] + path
+  end
+
+  def title
+    $settings[:title]
+  end
+
+  def subtitle
+    $settings[:subtitle]
+  end
 end

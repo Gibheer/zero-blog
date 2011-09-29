@@ -1,4 +1,7 @@
 $settings = {
+  :domain          => 'http://example.com',
+  :title           => 'zero-knowledge',
+  :subtitle        => 'scripte, programmieren und administrtieren',
   :environment     => :development,
   :logging         => true,
   :method_override => true,
