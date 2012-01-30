@@ -29,11 +29,11 @@ class Admin < Sinatra::Base
     @post.set_tags tags
     if @post.save
       flash.notice = 'Post saved'
-      redirect "/admin/post/#{@post.id}"
+      redirect "/admin/post/#{@post.id}", 303
     else
       flash.error = 'Error at saving the post'
       flash[:errors] = @post.errors
-      redirect "/admin/post/new"
+      redirect "/admin/post/new", 303
     end
   end
 
@@ -43,7 +43,7 @@ class Admin < Sinatra::Base
       haml :admin_post_change
     else
       flash.warning = "Post with id #{params[:id]} not found!"
-      redirect './post'
+      redirect './post', 303
     end
   end
 
@@ -70,7 +70,7 @@ class Admin < Sinatra::Base
       haml :admin_post_change
     else
       flash.warning = "Post with id #{params[:id]} not found!"
-      redirect './post'
+      redirect './post', 303
     end
   end
 
@@ -87,7 +87,7 @@ class Admin < Sinatra::Base
     else
       flash[:warning] = "Tag '#{@tag.name} could not be created! Error was: '#{@tag.errors.first}'"
     end
-    redirect '/admin/tag'
+    redirect '/admin/tag', 303
   end
 
   get '/tag/:id' do
@@ -100,7 +100,7 @@ class Admin < Sinatra::Base
     @tag.name = params['tag']['name']
     if @tag.save
       flash[:notice] = "Tag saved"
-      redirect '/admin/tag'
+      redirect '/admin/tag', 303
     else
       flash[:notice] = "Tag could not be saved! Message: '#{@tag.errors.first}'"
       haml :admin_tag_edit
@@ -117,16 +117,16 @@ class Admin < Sinatra::Base
     if account.nil?
       flash.warning = 'wrong username or password'
       flash[:username] = params['username']
-      redirect '/admin'
+      redirect '/admin', 303
     else
       flash.notice = 'Login successful'
       session[:id] = account.id
       session[:last_updated] = Time.now
       # redirect to the url set from the #before block
       if session.has_key? :to_path
-        redirect "/admin#{session.delete(:to_path)}"
+        redirect "/admin#{session.delete(:to_path)}", 303
       else
-        redirect '/admin/'
+        redirect '/admin/', 303
       end
     end
   end
@@ -144,6 +144,7 @@ class Admin < Sinatra::Base
 
   helpers do
     def session_read
+      puts session.inspect
       if (session.has_key?(:id) && session.has_key?(:last_updated) &&
           Time.now - session[:last_updated] < 1800)
         Account.get(session[:id])
@@ -178,7 +179,7 @@ class Admin < Sinatra::Base
     if @account.nil?
       flash.warning = 'You are not logged in!'
       session[:to_path] = request.path_info
-      redirect '/admin/login'
+      redirect '/admin/login', 303
     else
       session[:last_updated] = Time.now
     end
