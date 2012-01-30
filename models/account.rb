@@ -32,7 +32,7 @@ class Account
   #
   def self.authenticate(username, password)
     account = first(:conditions => { :username => username }) unless username.nil?
-    account && account.has_password?(password) ? account : nil
+    (account && account.has_password?(password)) ? account : nil
   end
 
   ##
@@ -48,7 +48,7 @@ class Account
 
   private
     def password_required
-      crypted_password.nil? || password.present?
+      crypted_password.nil? || password
     end
 
     def encrypt_password
