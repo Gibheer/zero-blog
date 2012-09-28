@@ -32,6 +32,7 @@ body {
       @include background-image(linear-gradient($highlight-gradient)); } }
   code {
     font-family: $font-family-code; }
+  pre { margin: 1em; }
   ul {
     list-style-type: circle;
     padding-left: 2em;
