@@ -1,9 +1,0 @@
-%form{:action => "/admin/tag/#{@tag.id}", :method => :post}
-  .fields
-    %input{:name => 'tag[name]', :placeholder => 'new tag name', :value => @tag.name}=""
-  .buttons
-    %button{:type => :submit}="update"
-%ul
-  -@tag.posts.each do |post|
-    %li
-      %a{:href => "/admin/post/#{post.id}"}=post.title

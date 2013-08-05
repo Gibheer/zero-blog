@@ -1,21 +1,8 @@
-source :rubygems
+source 'https://rubygems.org'
 
-gem 'rack', '1.3.6'
-gem 'sinatra'
-gem 'sinatra-support'
-gem 'rack-flash'
-gem 'haml'
+gem 'puma'
+gem 'zero', :git => 'https://github.com/libzero/zero.git'
+gem 'slim'
 gem 'sass'
 gem 'compass'
-gem 'data_mapper'
-gem 'dm-postgres-adapter'
-
-# the different markups
-gem 'redclothcoderay'
-gem 'coderay'
-gem 'RedCloth'
-gem 'redcarpet'
-
-group :install do
-  gem 'highline'
-end
+gem 'kramdown'
