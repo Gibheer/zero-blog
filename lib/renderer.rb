@@ -15,9 +15,7 @@ class Renderer
     template = templates[to_render]
     type = get_preferred_type(session, template)
     type = template.first[0] if type == DEFAULT_TYPE
-    puts template.inspect
     session.response.body = Tilt.new(template[type]).render(session.options)
-    puts session.response.body
     session.response.content_type = type
     nil
   end
