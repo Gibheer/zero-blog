@@ -1,0 +1,5 @@
+require 'bundler/setup'
+require 'sequel'
+require 'zero'
+require 'sass'
+require 'slim'

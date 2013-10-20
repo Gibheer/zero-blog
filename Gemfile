@@ -1,10 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'puma'
+gem 'sequel'
+gem 'do_postgres'
 gem 'zero', :git => 'https://github.com/libzero/zero.git'
 gem 'slim'
 gem 'sass'
-gem 'compass'
-gem 'kramdown'
-gem 'sequel'
-gem 'do_postgres'
+gem 'puma'
+gem 'rubysl', :platforms => :rbx
