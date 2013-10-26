@@ -16,6 +16,4 @@ html
             .author=post[:username]
             .date=  post[:written].strftime('%Y-%m-%d')
             .time=  post[:written].strftime('%H-%M')
-          section
-            markdown:
-              "#{post[:content]}"
+          section==Kramdown::Document.new(post[:content]).to_html
