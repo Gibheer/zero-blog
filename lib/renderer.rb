@@ -16,7 +16,7 @@ class Renderer
     type = get_preferred_type(session, template)
     type = template.first[0] if type == DEFAULT_TYPE
     session.response.body = Tilt.new(template[type]).render(session.options)
-    session.response.content_type = type
+    session.response.content_type = type_map[type]
     nil
   end
 
@@ -47,6 +47,10 @@ class Renderer
       'text/html'            => :html,
       'application/atom+xml' => :atom
     }
+  end
+
+  def self.type_map
+    @type_map ||= types.invert
   end
 
   def self.get_preferred_type(session, template)
