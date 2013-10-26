@@ -1,4 +1,4 @@
-doctype html
+doctype 5
 html
   head
     title zero-knowledge
@@ -7,6 +7,13 @@ html
       h1 zero-knowledge
       h2 noch ohne blub
     #content
-      - for post in DB[:posts] do
+      - for post in fetch(:posts)
         article
-          = post[:title]
+          header
+            h1
+              a href="/post/#{post[:post_id]}"= post[:title]
+          footer
+            .author=post[:username]
+            .date=  post[:written].strftime('%Y-%m-%d')
+            .time=  post[:written].strftime('%H-%M')
+          section= post[:content]

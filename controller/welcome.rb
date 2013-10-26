@@ -1,7 +1,7 @@
 module Routes
-  class Welcome < Controller
-    def self.get(session)
-      session.options[:render] = 'posts/index'
+  class Welcome
+    def self.call(session)
+      Post
     end
   end
 end
