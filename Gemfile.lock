@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/libzero/zero.git
-  revision: 3e0a3f20a79330f1f152a5f3667b29cb904d959c
+  revision: 06b851bd4f90109eae4bda8f9b69c60b221f6275
   specs:
     zero (0.2.0)
       tilt
@@ -15,14 +15,10 @@ GEM
       data_objects (= 0.10.13)
     ffi2-generators (0.1.1)
     minitest (4.7.5)
-    psych (2.0.1)
     puma (2.6.0)
       rack (>= 1.1, < 2.0)
-    racc (1.4.10)
     rack (1.5.2)
-    rubysl (2.0.10)
-      psych (~> 2.0)
-      racc (~> 1.4)
+    rubysl (2.0.11)
       rubysl-abbrev (~> 2.0)
       rubysl-base64 (~> 2.0)
       rubysl-benchmark (~> 2.0)
@@ -130,7 +126,7 @@ GEM
     rubysl-csv (2.0.1)
       rubysl-english (~> 2.0)
     rubysl-curses (2.0.0)
-    rubysl-date (2.0.5)
+    rubysl-date (2.0.6)
     rubysl-delegate (2.0.0)
     rubysl-digest (2.0.2)
     rubysl-drb (2.0.1)
@@ -185,7 +181,7 @@ GEM
     rubysl-observer (2.0.0)
     rubysl-open-uri (2.0.0)
     rubysl-open3 (2.0.0)
-    rubysl-openssl (2.0.0)
+    rubysl-openssl (2.0.1)
     rubysl-optparse (2.0.1)
       rubysl-shellwords (~> 2.0)
     rubysl-ostruct (2.0.4)
@@ -213,7 +209,7 @@ GEM
     rubysl-strscan (2.0.0)
     rubysl-syslog (2.0.1)
       ffi2-generators (~> 0.1)
-    rubysl-tempfile (2.0.0)
+    rubysl-tempfile (2.0.1)
     rubysl-test-unit (2.0.1)
       minitest (~> 4.7)
     rubysl-thread (2.0.2)
@@ -231,7 +227,7 @@ GEM
     rubysl-webrick (2.0.0)
     rubysl-xmlrpc (2.0.0)
     rubysl-yaml (2.0.0)
-    rubysl-zlib (2.0.0)
+    rubysl-zlib (2.0.1)
     sass (3.2.12)
     sequel (4.3.0)
     slim (2.0.1)

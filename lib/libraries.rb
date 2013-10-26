@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'yaml'
 require 'sequel'
 require 'zero'
 require 'sass'
