@@ -1,0 +1,18 @@
+doctype xml
+feed xmlns='http://www.w3.org/2005/Atom'
+  title zero-knowledge
+  link href='http://zero-knowledge.org'
+  link type='application/atom+xml' rel='self' href='http://zero-knowledge.org'
+  updated=fetch(:posts).first[:written].xmlschema
+  id http://zero-knowledge.org/
+  -for post in fetch(:posts)
+    entry
+      id="http://zero-knowledge.org/post/#{post[:post_id]}"
+      link(type='text/html' rel='alternate'
+        href="http://zero-knowledge.org/post/#{post[:post_id]}")
+      title=post[:title]
+      updated=post[:written].xmlschema
+      author
+        name=post[:username]
+      summary type='html'=post[:content]
+      content type='html'=post[:content]
