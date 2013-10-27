@@ -3,7 +3,6 @@ class Router
   # get the controller handling the request
   def self.call(session)
     variables = session.request.path.match(ROUTE_REGEX)
-    puts variables.inspect
     return default_route unless variables && variables[:controller]
     session.options[:id] = variables[:id]
     find(variables[:controller])
@@ -32,7 +31,8 @@ class Router
   # check for the controller name and return 404 when not found
   def self.find(ctrl)
     ctrl = ctrl.capitalize
-    return namespace.const_get(ctrl) if namespace.const_defined?(ctrl)
+    # make constant lookup without ancestors
+    return namespace.const_get(ctrl, false) if namespace.const_defined?(ctrl, false)
     namespace::RouteNotFound
   end
 end
