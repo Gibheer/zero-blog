@@ -6,7 +6,7 @@ class Router
     puts variables.inspect
     return default_route unless variables && variables[:controller]
     session.options[:id] = variables[:id]
-    find variables[:controller]
+    find(variables[:controller])
   end
 
   # the namespace of all routes
