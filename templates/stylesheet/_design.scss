@@ -1,0 +1,33 @@
+html {
+  text-size: 99%;
+  background-image: url('/images/irongrip.png');
+}
+
+html:after {
+  content: '';
+  background-color: fade-out($alternate_color, 0.85);
+  position: absolute;
+  top:    0;
+  left:   0;
+  bottom: 0;
+  right:  0;
+  z-index: -1;
+}
+
+code {
+  font-family: "PT mono", monospace;
+}
+
+article {
+  vertical-align: bottom;
+  header {
+    padding: $standard-width / 4;
+    display: inline-block;
+    h1 { margin: 0; }
+  }
+  footer {
+    padding: $standard-width / 4;
+    display: inline-block;
+    div { display: inline-block; }
+  }
+}

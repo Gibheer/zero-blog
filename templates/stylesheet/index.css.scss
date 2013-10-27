@@ -1,0 +1,12 @@
+// normal text color
+$normal_color: black;
+// the nice orange
+$action_color: hsl(32, 100%, 50%);
+// the blue
+$alternate_color: hsl(204, 35%, 35%);
+
+// standard size to size everything from that
+$standard-width: 1em;
+
+@import 'structure';
+@import 'design';

@@ -1,0 +1,12 @@
+header h1, header h2 {
+  display: inline-block;
+  margin: $standard-width / 2;
+  padding: 0;
+}
+
+body {
+  min-width: 300px;
+  width: 75%;
+  max-width: 1100px;
+  margin: auto;
+}
