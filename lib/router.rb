@@ -1,8 +1,9 @@
 class Router
-  ROUTE_REGEX = %r{\A(/(?<controller>[a-zA-Z]+)(/(?<id>[^/]+)?)?)?\Z}
+  ROUTE_REGEX = %r{\A(/(?<controller>[a-zA-Z]+)\.?(?<extension>[a-zA-Z]+)?(/(?<id>[^/]+)?)?)?\Z}
   # get the controller handling the request
   def self.call(session)
     variables = session.request.path.match(ROUTE_REGEX)
+    puts variables.inspect
     return default_route unless variables && variables[:controller]
     session.options[:id] = variables[:id]
     find variables[:controller]
