@@ -8,5 +8,75 @@ $alternate_color: hsl(204, 35%, 35%);
 // standard size to size everything from that
 $standard-width: 1em;
 
-@import 'structure';
-@import 'design';
+html {
+  text-size: 99%;
+  background-image: url('/images/irongrip.png');
+  position: relative;
+  min-width: 300px;
+  width: 100%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+body:after {
+  content: '';
+  background-color: fade-out($alternate_color, 0.85);
+  position: absolute;
+  top:    0;
+  left:   0;
+  bottom: 0;
+  right:  0;
+  z-index: -1;
+}
+
+code {
+  font-family: "PT mono", monospace;
+  font-size: $standard-width * 0.95;
+  font-weigth: bold;
+}
+pre {
+  border: $standard-width solid hsla(0, 0%, 0%, 0);
+  overflow-x: auto;
+}
+
+header h1, header h2 {
+  display: inline-block;
+  margin: $standard-width / 2;
+  padding: 0;
+}
+
+article, pre {
+  background-color: fade-out($alternate-color, 0.7);
+}
+
+article {
+  color: hsl(0, 0%, 90%);
+  padding: $standard-width;
+  a {
+    text-decoration: none;
+    color: $action-color;
+  }
+  header {
+    padding: $standard-width / 4;
+    display: inline-block;
+    h1 { margin: 0; }
+  }
+  footer {
+    padding: $standard-width / 4;
+    display: inline-block;
+    font-size: $standard-width * 0.9;
+    div {
+      display: inline-block;
+      margin: $standard-width / 5;
+      font-weight: bold;
+      color: hsl(0, 0%, 60%);
+    }
+    .author:before { content: 'by '; }
+    .date:before { content: ' on '; }
+    .time { display: none; }
+  }
+  section {
+    border-top: $standard-width/5 solid $alternate-color;
+    word-wrap: break-word;
+  }
+}
