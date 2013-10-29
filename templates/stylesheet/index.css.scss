@@ -10,22 +10,12 @@ $standard-width: 1em;
 
 html {
   text-size: 99%;
-  background-image: url('/images/irongrip.png');
+  /* original picture from http://subtlepatterns.com/iron-grip/ */
+  background-image: url('/images/irongrip-zero.png');
   min-width: 300px;
   width: 100%;
   max-width: 1100px;
   margin: auto;
-}
-
-body:after {
-  content: '';
-  background-color: fade-out($alternate_color, 0.85);
-  position: absolute;
-  top:    0;
-  left:   0;
-  bottom: 0;
-  right:  0;
-  z-index: -1;
 }
 
 code {
