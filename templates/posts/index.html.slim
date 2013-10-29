@@ -1,3 +1,8 @@
+- if 0 < fetch(:page)
+  a.page.up(
+    href="/post?page=#{fetch(:page) - 1}&per_page=#{fetch(:per_page)}"
+    ) show newer
+
 - for post in fetch(:posts)
   article
     header
@@ -8,3 +13,8 @@
       .date=  post[:written].strftime('%Y-%m-%d')
       .time=  post[:written].strftime('%H-%M')
     section==Kramdown::Document.new(post[:content]).to_html
+
+- if fetch(:page) < fetch(:pages)
+  a.page.down(
+    href="/post?page=#{fetch(:page) + 1}&per_page=#{fetch(:per_page)}"
+    ) show older

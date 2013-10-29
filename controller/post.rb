@@ -6,8 +6,15 @@ module Routes
     end
 
     def self.define_posts(session)
-      page     = (session.request.params['page'] || 0).to_i
-      per_page = (session.request.params['per_page'] || 10).to_i
+      # compute pages
+      page = session.request.params['page'].to_i
+      session.options[:page] = page if page
+      per_page = session.request.params['per_page'].to_i
+      per_page = 10 if per_page == 0
+      session.options[:per_page] = per_page if per_page
+      session.options[:pages] = DB[:posts].filter(:released => true).count / per_page
+
+      # fetch the posts to show
       posts = DB[:posts].
         filter(:released => true).
         select(:posts__id___post_id, :written, :title, :content, :username).
