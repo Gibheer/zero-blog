@@ -6,6 +6,8 @@ module Routes
     end
 
     def self.define_posts(session)
+      page     = (session.request.params['page'] || 0).to_i
+      per_page = (session.request.params['per_page'] || 10).to_i
       posts = DB[:posts].
         filter(:released => true).
         select(:posts__id___post_id, :written, :title, :content, :username).
@@ -14,7 +16,7 @@ module Routes
       if session.options[:id]
         posts = posts.where(:posts__id => session.options[:id]) 
       end
-      session.options[:posts]  = posts
+      session.options[:posts]  = posts.limit(per_page, page * per_page)
     end
   end
 end
