@@ -27,10 +27,12 @@ pre {
   overflow-x: auto;
 }
 
-header h1, header h2 {
-  display: inline-block;
-  margin: $standard-width / 2;
-  padding: 0;
+#header {
+  h1, h2 {
+    display: none;
+    margin: $standard-width / 2;
+    padding: 0;
+  }
 }
 
 a {
@@ -39,16 +41,27 @@ a {
 }
 
 .page {
+  margin-left: $standard-width;
+  margin-right: $standard-width;
   display: block;
-  margin-top: $standard-width / 2;
-  margin-bottom: $standard-width / 2;
   text-align: center;
-  color: lighten($action-color, 10);
   padding: $standard-width;
   font-size: $standard-width * 0.9;
   font-weight: bold;
+  &.up {
+    border-top: $standard-width / 4 solid $alternate-color;
+    &:hover, &:focus, &:active {
+      border-top: $standard-width / 4 solid $action-color;
+    }
+  }
+  &.down {
+    border-bottom: $standard-width / 4 solid $alternate-color;
+    &:hover, &:focus, &:active {
+      border-bottom: $standard-width / 4 solid $action-color;
+    }
+  }
 }
-article, pre, .page {
+#content, pre {
   background-color: fade-out($alternate-color, 0.7);
 }
 article {
@@ -57,7 +70,8 @@ article {
   header {
     padding: $standard-width / 4;
     display: inline-block;
-    h1 { margin: 0; }
+    h1 { margin: 0;}
+    h1, h2 { display: inline-block; }
   }
   footer {
     padding: $standard-width / 4;
