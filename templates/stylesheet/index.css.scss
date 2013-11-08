@@ -1,5 +1,5 @@
 // normal text color
-$normal_color: black;
+$normal_color: hsl(0,0, 90%);
 // the nice orange
 $action_color: hsl(32, 100%, 50%);
 // the blue
@@ -65,7 +65,7 @@ a {
   background-color: fade-out($alternate-color, 0.7);
 }
 article {
-  color: hsl(0, 0%, 90%);
+  color: $normal_color;
   padding: $standard-width;
   header {
     padding: $standard-width / 4;
@@ -90,5 +90,12 @@ article {
   section {
     border-top: $standard-width/5 solid $alternate-color;
     word-wrap: break-word;
+    h1 { font-size: $standard-width * 1.3 }
+    h2 { font-size: $standard-width * 1.2 }
+    h3 { font-size: $standard-width * 1.1; font-weight: normal; }
+    h1, h2, h3 {
+      border-bottom: $standard-width / 10 solid $normal-color;
+      margin-right: 25%;
+    }
   }
 }
