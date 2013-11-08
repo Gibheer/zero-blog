@@ -15,4 +15,4 @@ feed xmlns='http://www.w3.org/2005/Atom'
       author
         name=post[:username]
       summary type='html'=post[:content]
-      content type='html'=post[:content]
+      content type='html'=Kramdown::Document.new(post[:content]).to_html
