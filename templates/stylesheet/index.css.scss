@@ -97,5 +97,6 @@ article {
       border-bottom: $standard-width / 10 solid $normal-color;
       margin-right: 25%;
     }
+    code, pre { word-wrap: initial; }
   }
 }
