@@ -1,1 +1,1 @@
-:db: "do:postgres://localhost/blogdb"
+:db: "postgres://localhost/blogdb"
