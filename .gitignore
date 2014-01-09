@@ -1,6 +1,6 @@
 *.rbc
 *.swp
 .sass-cache/*
-settings.rb
 images/*
 .rbx
+config.yml
