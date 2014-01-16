@@ -4,9 +4,14 @@ $normal_color: hsl(0,0, 90%);
 $action_color: hsl(32, 100%, 50%);
 // the blue
 $alternate_color: hsl(204, 35%, 35%);
+// box color for quotes and code
+$box_color: hsla(0, 0%, 0%, 0);
 
 // standard size to size everything from that
 $standard-width: 1em;
+
+// other variables
+$box_border: $standard-width solid $box_color;
 
 html {
   font-size: 99%;
@@ -23,8 +28,13 @@ code {
   font-family: "PT mono", monospace;
 }
 pre {
-  border: $standard-width solid hsla(0, 0%, 0%, 0);
+  border: $box_border;
   overflow-x: auto;
+}
+blockquote {
+  border: $box_border;
+  margin: 0;
+  font-style: italic;
 }
 
 #header {
@@ -61,7 +71,7 @@ a {
     }
   }
 }
-#content, pre {
+#content, pre, blockquote {
   background-color: fade-out($alternate-color, 0.7);
 }
 article {
