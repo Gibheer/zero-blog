@@ -19,7 +19,7 @@ SQL
         filter(:released => true).
         select(:posts__id___post_id, :written, :title, :content, :username).
         join(:accounts, :id___account_id => :account_id).
-        reverse_order(:written)
+        reverse_order(:written, :posts__id)
 
       # return when a single posts has to be shown
       return load_previous_and_next_post(session, posts) if session.options[:id]
