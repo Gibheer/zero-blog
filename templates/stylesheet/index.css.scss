@@ -30,6 +30,18 @@ code {
 pre {
   border: $box_border;
   overflow-x: auto;
+  position: relative;
+
+  &:before {
+    content: '|';
+    font-size: 150%;
+    color: fade-out($alternate-color, 0.2);
+    font-weight: bold;
+    z-index: -1;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 }
 blockquote {
   border: $box_border;
@@ -37,7 +49,7 @@ blockquote {
   font-style: italic;
   position: relative;
 
-  :before {
+  &:before {
     content: '”';
     font-size: 300%;
     color: fade-out($alternate-color, 0.2);
