@@ -35,6 +35,25 @@ blockquote {
   border: $box_border;
   margin: 0;
   font-style: italic;
+  position: relative;
+
+  :before {
+    content: '”';
+    font-size: 300%;
+    color: fade-out($alternate-color, 0.2);
+    font-weight: bold;
+    z-index: -1;
+    position: absolute;
+    bottom: $standard-width * -0.75;
+    right: $standard-width * -0.1;
+  }
+
+  p:first-child {
+    margin-top: 0;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 #header {
