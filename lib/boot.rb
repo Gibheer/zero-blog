@@ -5,6 +5,7 @@ require 'session'
 require 'application'
 require 'controller'
 require 'renderer'
+require 'render'
 require 'router'
 
 config = YAML.load_file(File.expand_path('../../config.yml', __FILE__))
