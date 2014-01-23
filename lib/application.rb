@@ -8,7 +8,7 @@ class Application
     session = Session.new(
       ::Zero::Request.new(env),
       ::Zero::Response.new,
-      @defaults.clone
+      Render.new(@defaults.clone)
     )
     worker = @start
     while not worker.nil?

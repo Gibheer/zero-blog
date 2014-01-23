@@ -1,17 +1,18 @@
 - if has_key?(:page) && 0 < fetch(:page)
   a.page.up(
-    href="/post?page=#{fetch(:page) - 1}&per_page=#{fetch(:per_page)}"
+    href=link_to(:post, fetch(:query), :page => fetch(:page) - 1)
     ) show newer
 - if has_key?(:post_ids_pn) && fetch(:post_ids_pn)[:younger]
   a.page.up(
-    href="/post/#{fetch(:post_ids_pn)[:younger]}"
+    href=link_to(:post, fetch(:post_ids_pn)[:younger], fetch(:query))
     ) show newer
 
 - for post in fetch(:posts)
   article
     header
       h1
-        a href="/post/#{post[:post_id]}"= post[:title]
+        //a(href=link_to(:post, post[:post_id], fetch(:query))) post[:title]
+        a(href=link_to(:post, post[:post_id]))=post[:title]
     footer
       .author=post[:username]
       .date=  post[:written].strftime('%Y-%m-%d')
@@ -20,9 +21,9 @@
 
 - if has_key?(:page) && fetch(:page) < fetch(:pages)
   a.page.down(
-    href="/post?page=#{fetch(:page) + 1}&per_page=#{fetch(:per_page)}"
+    href=link_to(:post, fetch(:query), :page => fetch(:page) + 1)
     ) show older
 - if has_key?(:post_ids_pn) && fetch(:post_ids_pn)[:older]
   a.page.down(
-    href="/post/#{fetch(:post_ids_pn)[:older]}"
+    href=link_to(:post, fetch(:post_ids_pn)[:older])
     ) show older
