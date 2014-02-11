@@ -21,11 +21,19 @@ SQL
         join(:accounts, :id___account_id => :account_id).
         reverse_order(:written, :posts__id)
 
-      posts = load_fulltextsearch(session, posts) if session.request.params['search']
+      if session.options[:id]
+        posts = posts.filter(:posts__id => session.options[:id].to_i)
+        return RouteNotFound if posts.empty?
+        load_previous_and_next_post(session, posts)
+      else
+        if session.request.params['search']
+          posts = load_fulltextsearch(session, posts)
+        end
+        load_page_information(session, posts)
+        # return no_results if posts.empty?
+      end
 
-      # return when a single posts has to be shown
-      return load_previous_and_next_post(session, posts) if session.options[:id]
-      load_page_information(session, posts)
+      session.options[:posts] = posts
     end
 
     # load posts depending on the pagination
@@ -37,15 +45,10 @@ SQL
       per_page = 10 if per_page < 1
       session.options[:query][:per_page] = per_page if per_page
       session.options[:pages] = posts.count / per_page
-
-      # fetch the posts to show
-      session.options[:posts]  = posts.limit(per_page, page * per_page)
     end
 
     # load a single posts and the ids of the next and previous posts
     def self.load_previous_and_next_post(session, posts)
-      posts = posts.filter(:posts__id => session.options[:id].to_i)
-      session.options[:posts] = posts
       written = posts.first[:written]
       session.options[:post_ids_pn] = DB[PREV_AND_NEXT_QUERY, written, written].first
     end
