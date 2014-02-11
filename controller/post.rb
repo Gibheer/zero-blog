@@ -23,8 +23,7 @@ SQL
 
       if session.options[:id]
         posts = posts.filter(:posts__id => session.options[:id].to_i)
-        return RouteNotFound if posts.empty?
-        load_previous_and_next_post(session, posts)
+        load_previous_and_next_post(session, posts) unless posts.empty?
       else
         if session.request.params['search']
           posts = load_fulltextsearch(session, posts)
