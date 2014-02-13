@@ -1,10 +1,8 @@
 module Routes
-  class RouteNotFound
-    def self.call(session)
+  class RouteNotFound < Controller
+    def self.get(session)
+      session.options[:render] = 'error/route_not_found'
       session.response.status = 404
-      session.response.content_type = 'text/html'
-      session.response.body = 'This page does not exist!'
-      nil
     end
   end
 end
