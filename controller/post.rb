@@ -10,33 +10,31 @@ module Routes
 SQL
 
     def self.get(session)
-      define_posts(session)
+      posts = define_posts_query(session)
+      if session.options[:id]
+        posts = posts.filter(:posts__id => session.options[:id].to_i)
+        return RouteNotFound if posts.empty?
+        set_previous_and_next_post(session, posts)
+      else
+        if session.request.params['search']
+          posts = load_fulltextsearch(session, posts)
+        end
+        set_page_information(session, posts)
+      end
+      session.options[:posts]  = posts
       session.options[:render] = 'posts/index'
     end
 
-    def self.define_posts(session)
+    def self.define_posts_query(session)
       posts = DB[:posts].
         filter(:released => true).
         select(:posts__id___post_id, :written, :title, :content, :username).
         join(:accounts, :id___account_id => :account_id).
         reverse_order(:written, :posts__id)
-
-      if session.options[:id]
-        posts = posts.filter(:posts__id => session.options[:id].to_i)
-        load_previous_and_next_post(session, posts) unless posts.empty?
-      else
-        if session.request.params['search']
-          posts = load_fulltextsearch(session, posts)
-        end
-        load_page_information(session, posts)
-        # return no_results if posts.empty?
-      end
-
-      session.options[:posts] = posts
     end
 
     # load posts depending on the pagination
-    def self.load_page_information(session, posts)
+    def self.set_page_information(session, posts)
       # compute pages
       page = session.request.params['page'].to_i
       session.options[:page] = page if page
@@ -47,7 +45,7 @@ SQL
     end
 
     # load a single posts and the ids of the next and previous posts
-    def self.load_previous_and_next_post(session, posts)
+    def self.set_previous_and_next_post(session, posts)
       written = posts.first[:written]
       session.options[:post_ids_pn] = DB[PREV_AND_NEXT_QUERY, written, written].first
     end

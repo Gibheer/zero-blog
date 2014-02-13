@@ -5,7 +5,8 @@ class Controller
   end
 
   def self.call_method(session)
-    send(session.request.method, session)
+    result = send(session.request.method, session)
+    return result if result.kind_of?(Class)
     session.options[:renderer]
   end
 end
