@@ -7,4 +7,3 @@ gem 'slim'
 gem 'sass'
 gem 'kramdown'
 gem 'puma'
-gem 'rubysl', :platforms => :rbx
