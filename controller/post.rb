@@ -19,7 +19,11 @@ SQL
         if session.request.params['search']
           posts = load_fulltextsearch(session, posts)
         end
-        set_page_information(session, posts)
+        page = session.request.params['page'].to_i
+        per_page = session.request.params['per_page'].to_i
+        per_page = 10 if per_page && per_page < 1
+        set_page_information(session, posts, page, per_page)
+        posts = posts.limit(per_page).offset(page * per_page)
       end
       session.options[:posts]  = posts
       session.options[:render] = 'posts/index'
@@ -34,12 +38,9 @@ SQL
     end
 
     # load posts depending on the pagination
-    def self.set_page_information(session, posts)
+    def self.set_page_information(session, posts, page, per_page)
       # compute pages
-      page = session.request.params['page'].to_i
       session.options[:page] = page if page
-      per_page = session.request.params['per_page'].to_i
-      per_page = 10 if per_page < 1
       session.options[:query][:per_page] = per_page if per_page
       session.options[:pages] = posts.count / per_page
     end
