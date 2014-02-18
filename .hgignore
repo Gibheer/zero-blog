@@ -1,0 +1,8 @@
+syntax: glob
+*.orig
+config.yml
+*.rbc
+*.swp
+.sass-cache/*
+images/*
+.rbx
