@@ -63,22 +63,25 @@ func (r *Router) Use(middleware ContextFunc) {
 
 func (router *Router) addRoute(method, path string, target ContextFunc) {
   router.router.Handle(
-      method,
-      router.path + path,
-      func(response http.ResponseWriter,
-           request  *http.Request,
-           params   httprouter.Params) {
+    method,
+    router.path + path,
+    router.createHandleFunction(target),
+  )
+}
+
+func (r *Router) createHandleFunction(target ContextFunc) httprouter.Handle {
+  return func(
+    response http.ResponseWriter,
+    request  *http.Request,
+    params   httprouter.Params) {
+
     ctx := &Context{
-      request,
-      response,
-      params,
-      addToFuncList(router.funcList, target),
-      0,
+      request, response, params, addToFuncList(r.funcList, target), 0,
     }
     for i := 0; i < len(ctx.funcList); i++ {
       ctx.funcList[i](ctx)
     }
-  })
+  }
 }
 
 func (r *Router) Start() {
