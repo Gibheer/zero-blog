@@ -16,6 +16,8 @@ type Router struct {
   funcList []ContextFunc
   // the router to use as the main entity
   router *httprouter.Router
+  // the parent router, if any
+  parent *Router
 }
 
 // Bundle all parameters into the context to make it easier to push important
@@ -38,7 +40,14 @@ type Context struct {
 type ContextFunc func(*Context) error
 
 func NewRouter() *Router {
-  return &Router{"", make([]ContextFunc, 0), httprouter.New()}
+  return &Router{"", make([]ContextFunc, 0), httprouter.New(), nil}
+}
+
+func (r *Router) fullpath(path string) string {
+  if r.parent != nil {
+    return r.parent.fullpath(r.path + path)
+  }
+  return r.path + path
 }
 
 func (r *Router) Get(path string, target ContextFunc) {
@@ -57,14 +66,10 @@ func (r *Router) Delete(path string, target ContextFunc) {
   r.addRoute("DELETE", path, target)
 }
 
-func (r *Router) Use(middleware ContextFunc) {
-  r.funcList = addToFuncList(r.funcList, middleware)
-}
-
 func (router *Router) addRoute(method, path string, target ContextFunc) {
   router.router.Handle(
     method,
-    router.path + path,
+    router.fullpath(path),
     router.createHandleFunction(target),
   )
 }
@@ -82,6 +87,14 @@ func (r *Router) createHandleFunction(target ContextFunc) httprouter.Handle {
       ctx.funcList[i](ctx)
     }
   }
+}
+
+func (r *Router) Use(middleware ContextFunc) {
+  r.funcList = addToFuncList(r.funcList, middleware)
+}
+
+func (r *Router) NewGroup(path string) *Router {
+  return &Router{path, make([]ContextFunc, 0), r.router, r}
 }
 
 func (r *Router) Start() {
