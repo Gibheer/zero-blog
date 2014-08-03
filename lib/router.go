@@ -50,6 +50,13 @@ func (r *Router) fullpath(path string) string {
   return r.path + path
 }
 
+func (r *Router) fullFuncList() []ContextFunc {
+  if r.parent != nil {
+    return append(r.parent.fullFuncList(), r.funcList...)
+  }
+  return r.funcList
+}
+
 func (r *Router) Get(path string, target ContextFunc) {
   r.addRoute("GET", path, target)
 }
@@ -81,7 +88,7 @@ func (r *Router) createHandleFunction(target ContextFunc) httprouter.Handle {
     params   httprouter.Params) {
 
     ctx := &Context{
-      request, response, params, append(r.funcList, target), 0,
+      request, response, params, append(r.fullFuncList(), target), 0,
     }
     for i := 0; i < len(ctx.funcList); i++ {
       ctx.funcList[i](ctx)
