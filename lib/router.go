@@ -81,7 +81,7 @@ func (r *Router) createHandleFunction(target ContextFunc) httprouter.Handle {
     params   httprouter.Params) {
 
     ctx := &Context{
-      request, response, params, addToFuncList(r.funcList, target), 0,
+      request, response, params, append(r.funcList, target), 0,
     }
     for i := 0; i < len(ctx.funcList); i++ {
       ctx.funcList[i](ctx)
@@ -90,7 +90,7 @@ func (r *Router) createHandleFunction(target ContextFunc) httprouter.Handle {
 }
 
 func (r *Router) Use(middleware ContextFunc) {
-  r.funcList = addToFuncList(r.funcList, middleware)
+  r.funcList = append(r.funcList, middleware)
 }
 
 func (r *Router) NewGroup(path string) *Router {
@@ -100,11 +100,4 @@ func (r *Router) NewGroup(path string) *Router {
 func (r *Router) Start() {
   log.Print("Starting to listen for incoming requests ...")
   log.Fatal(http.ListenAndServe(":9292", r.router))
-}
-
-func addToFuncList(list []ContextFunc, element ContextFunc) []ContextFunc {
-  new_list := make([]ContextFunc, len(list) + 1)
-  copy(new_list, list)
-  new_list[len(list)] = element
-  return new_list
 }
