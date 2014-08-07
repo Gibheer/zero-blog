@@ -10,6 +10,8 @@ import (
 
 // this router defines each action to take for an URI including the middlewares
 type Router struct {
+  // the environment of the application with settings and database connection
+  env *Environment
   // path that this engine takes care of relative to the parent
   path string
   // the list of functions to run on a request
@@ -18,6 +20,11 @@ type Router struct {
   router *httprouter.Router
   // the parent router, if any
   parent *Router
+}
+
+// create a new router with the specific environment
+func NewRouter(env *Environment) *Router {
+  return &Router{env, "", make([]ContextFunc, 0), httprouter.New(), nil}
 }
 
 // Bundle all parameters into the context to make it easier to push important
@@ -34,14 +41,12 @@ type Context struct {
   funcList []ContextFunc
   // the current position in the function list
   current int
+  // a direct link to the environment
+  Env *Environment
 }
 
 // the func type for internal routes
 type ContextFunc func(*Context) error
-
-func NewRouter() *Router {
-  return &Router{"", make([]ContextFunc, 0), httprouter.New(), nil}
-}
 
 func (r *Router) fullpath(path string) string {
   if r.parent != nil {
@@ -88,7 +93,7 @@ func (r *Router) createHandleFunction(target ContextFunc) httprouter.Handle {
     params   httprouter.Params) {
 
     ctx := &Context{
-      request, response, params, append(r.fullFuncList(), target), 0,
+      request, response, params, append(r.fullFuncList(), target), 0, r.env,
     }
     for i := 0; i < len(ctx.funcList); i++ {
       ctx.funcList[i](ctx)
@@ -101,7 +106,7 @@ func (r *Router) Use(middleware ContextFunc) {
 }
 
 func (r *Router) NewGroup(path string) *Router {
-  return &Router{path, make([]ContextFunc, 0), r.router, r}
+  return &Router{r.env, path, make([]ContextFunc, 0), r.router, r}
 }
 
 func (r *Router) Start() {
