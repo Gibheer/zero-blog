@@ -3,3 +3,6 @@
 # more information can be obtained on the github page of the driver
 # http://godoc.org/github.com/lib/pq
 connection: user=zeroblog password=foobar sslmode=disable
+
+# the base template directory
+templates: templates

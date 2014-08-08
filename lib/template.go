@@ -1,6 +1,7 @@
 package lib
 
 import (
+  "errors"
   "log"
   "io/ioutil"
   "os"
@@ -15,6 +16,8 @@ type fileList struct {
 
 // load all templates found as childs of the path
 func LoadTemplates(path string) (*template.Template, error) {
+  // TODO add better check for template directory
+  if path == "" { return nil, errors.New("template path empty") }
   f := &fileList{len(path), &template.Template{}}
 
   err := filepath.Walk(path, f.scanFile)

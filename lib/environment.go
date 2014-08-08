@@ -8,6 +8,7 @@ import (
 
 type Settings struct {
   Connection string
+  Templates string
 }
 
 type Environment struct {
