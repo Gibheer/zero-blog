@@ -16,5 +16,10 @@ func boot_system() (*lib.Environment, error) {
   if err != nil {
     return env, err
   }
+  env.Template, err = lib.LoadTemplates(`templates`)
+  if err != nil {
+    return env, err
+  }
+
   return env, nil
 }

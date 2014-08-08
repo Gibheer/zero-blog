@@ -2,6 +2,7 @@ package lib
 
 import (
   "io/ioutil"
+  "text/template"
   "gopkg.in/yaml.v1"
 )
 
@@ -14,6 +15,8 @@ type Environment struct {
   Config *Settings
   // the database connection pool
   DB *Database
+  // the base template system
+  Template *template.Template
 }
 
 func LoadConfiguration() (*Settings, error) {
